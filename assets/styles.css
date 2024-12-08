@@ -1,5 +1,6 @@
 :root {
     --primary-blue: rgba(66, 135, 245, 0.1);
+    --hover-blue: rgba(66, 135, 245, 0.2);
 }
 
 body {
@@ -81,6 +82,34 @@ img {
     margin: 1rem 0;
 }
 
+.top-nav {
+    background-color: white;
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link {
+    color: #333;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.nav-link:hover {
+    background-color: var(--hover-blue);
+}
+
 article {
     background-color: var(--primary-blue);
+}
+
+.creation-date {
+    text-align: right;
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: -1rem;
+    margin-bottom: 2rem;
+    font-style: italic;
 }
