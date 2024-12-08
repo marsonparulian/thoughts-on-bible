@@ -1,9 +1,0 @@
-{
-  "name": "markdown-converter",
-  "version": "1.0.0",
-  "description": "Convert markdown files to HTML",
-  "main": "convert.js",
-  "dependencies": {
-    "marked": "^11.0.0"
-  }
-}
