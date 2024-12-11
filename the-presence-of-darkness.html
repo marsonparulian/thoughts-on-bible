@@ -8,6 +8,165 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
         integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/x1nNMw0=" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/styles.css">
+    <style>
+        body {
+            background-color: #0a0a0a;
+            /* Darker background */
+            color: #b0b0b0;
+            /* Slightly muted text for mysterious feel */
+            font-family: 'Times New Roman', serif;
+            /* More classical font */
+            line-height: 1.8;
+            animation: fadeToLight 10s forwards;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #9370DB;
+            /* Softer purple for headings */
+            text-shadow: 2px 2px 4px rgba(147, 112, 219, 0.2);
+            /* Subtle glow effect */
+            font-family: 'Georgia', serif;
+            animation: fadeToLightHeadings 10s forwards;
+        }
+
+        a {
+            color: #4fd1c5;
+            /* Softer teal for links */
+            transition: all 0.3s ease;
+            animation: fadeToLightLinks 10s forwards;
+        }
+
+        a:hover {
+            color: #81e6d9;
+            /* Brighter on hover */
+            text-shadow: 0 0 8px rgba(129, 230, 217, 0.4);
+        }
+
+        .top-nav {
+            background-color: #151515;
+            padding: 1rem;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .top-nav>a {
+            padding: 0.5rem 1rem;
+            text-decoration: none;
+            font-family: 'Georgia', serif;
+            position: relative;
+            animation: softGlow 6s ease-in-out infinite;
+        }
+
+        @keyframes softGlow {
+            0% {
+                color: #777777;
+                text-shadow: 0 0 4px rgba(79, 209, 197, 0.3);
+            }
+
+            50% {
+                color: #ffffff;
+                text-shadow: 0 0 12px rgba(224, 224, 224, 0.6);
+            }
+
+            100% {
+                color: #555555;
+                text-shadow: 0 0 4px rgba(79, 209, 197, 0.3);
+            }
+        }
+
+        .top-nav>a:hover {
+            animation: none;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        blockquote {
+            background-color: #151515;
+            border-left: 4px solid #9370DB;
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        blockquote p {
+            color: #c0c0c0;
+            /* Slightly brighter text for quotes */
+            font-style: italic;
+        }
+
+        footer {
+            color: #666;
+            border-top: 1px solid #2a2a2a;
+            padding-top: 1rem;
+        }
+
+        /* Smooth scrolling for better experience */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Add subtle fade-in animation for content */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        main {
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeToLight {
+            0% {
+                background-color: #0a0a0a;
+                /* Dark background */
+                color: #d0d0d0;
+                /* Dark text */
+            }
+
+            100% {
+                background-color: #ffffff;
+                /* Light background */
+                color: #000000;
+                /* Dark text for light theme */
+            }
+        }
+
+        @keyframes fadeToLightHeadings {
+            0% {
+                color: #9370DB;
+                /* Dark purple */
+            }
+
+            100% {
+                color: #111;
+                /* Dark gray for light theme */
+            }
+        }
+
+        @keyframes fadeToLightLinks {
+            0% {
+                color: #4fd1c5;
+                /* Dark teal */
+            }
+
+            100% {
+                color: #2563eb;
+                /* Blue for light theme */
+            }
+        }
+    </style>
 </head>
 
 <body>
