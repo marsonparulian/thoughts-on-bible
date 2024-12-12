@@ -4,166 +4,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>The Presence of Darkness - Thoughts on Bible</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><path d='M50 15 L85 85 L15 85 Z' fill='%239370DB' /></svg>">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css"
-        integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/x1nNMw0=" crossorigin="anonymous">
+        anonymous">
     <link rel="stylesheet" href="./assets/styles.css">
     <style>
-        body {
-            background-color: #0a0a0a;
-            /* Darker background */
-            color: #b0b0b0;
-            /* Slightly muted text for mysterious feel */
-            font-family: 'Times New Roman', serif;
-            /* More classical font */
-            line-height: 1.8;
-            animation: fadeToLight 10s forwards;
+        :root {
+            --primary-purple: #9370DB;
+            --primary-purple-dark: #7851c7;
+            --primary-purple-light: #b094e5;
+            --text-light: #b0b0b0;
+            --text-lighter: #c0c0c0;
+            --bg-dark: #0a0a0a;
+            --bg-darker: #080808;
+            --bg-lighter: #151515;
+            --border-color: #2a2a2a;
         }
 
+        /* Initial style: all black */
+        *,
+        body,
         h1,
-        h2,
-        h3 {
-            color: #9370DB;
-            /* Softer purple for headings */
-            text-shadow: 2px 2px 4px rgba(147, 112, 219, 0.2);
-            /* Subtle glow effect */
-            font-family: 'Georgia', serif;
-            animation: fadeToLightHeadings 10s forwards;
+        .top-nav,
+        .top-nav a {
+            background-color: black;
+            color: black;
+            border-color: black;
+            text-shadow: none;
+            box-shadow: none;
         }
 
-        a {
-            color: #4fd1c5;
-            /* Softer teal for links */
-            transition: all 0.3s ease;
-            animation: fadeToLightLinks 10s forwards;
+        /* light theme, the opposite of the above style */
+        .light-theme {
+            color: black;
+            background-color: white;
         }
 
-        a:hover {
-            color: #81e6d9;
-            /* Brighter on hover */
-            text-shadow: 0 0 8px rgba(129, 230, 217, 0.4);
+        /* start of initial styling  */
+        h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin: 13rem 0 1rem 0;
+            opacity: 1 !important;
+            /* !important, because on the next style all elements will be set to transparent */
+            text-align: center;
+
         }
 
-        .top-nav {
-            background-color: #151515;
-            padding: 1rem;
-            border-bottom: 1px solid #2a2a2a;
+        /* Set all elements, except h1, to transparent */
+        main>* {
+            /* Note: Above, H1 opacity already set to NOT transparent */
+            opacity: 0;
         }
 
-        .top-nav>a {
-            padding: 0.5rem 1rem;
-            text-decoration: none;
-            font-family: 'Georgia', serif;
-            position: relative;
-            animation: softGlow 6s ease-in-out infinite;
+
+        /* Used by `H1 > span` when become visible the first time */
+        .text-to-light {
+            animation: textToLight 5s ease-in-out;
         }
 
-        @keyframes softGlow {
-            0% {
-                color: #777777;
-                text-shadow: 0 0 4px rgba(79, 209, 197, 0.3);
+        @keyframes textToLight {
+            from {
+                color: black;
             }
 
             50% {
-                color: #ffffff;
-                text-shadow: 0 0 12px rgba(224, 224, 224, 0.6);
+                color: white;
             }
 
-            100% {
-                color: #555555;
-                text-shadow: 0 0 4px rgba(79, 209, 197, 0.3);
+            to {
+                color: black;
             }
         }
 
-        .top-nav>a:hover {
-            animation: none;
-            color: #ffffff;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        /* create and grow shadow to a big light  */
+        .shadow-to-shine {
+            animation: shadowToShine 5s ease-in-out;
         }
 
-        .content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
+        @keyframes shadowToShine {
+            from {
+                text-shadow: 0 0 0 rgba(255, 255, 255, 0);
+            }
+
+            to {
+                text-shadow: 0 0 250px rgba(255, 255, 255, 1);
+            }
         }
 
-        blockquote {
-            background-color: #151515;
-            border-left: 4px solid #9370DB;
-            padding: 1rem 1.5rem;
-            margin: 1.5rem 0;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        /* Used by general elements to transform from dark-theme to light-theme */
+        .to-light {
+            animation: toLight 3s ease-in forwards;
         }
 
-        blockquote p {
-            color: #c0c0c0;
-            /* Slightly brighter text for quotes */
-            font-style: italic;
+        @keyframes toLight {
+            from {
+                color: black;
+                background: black;
+            }
+
+            to {
+                color: black;
+                background-color: white;
+            }
         }
 
-        footer {
-            color: #666;
-            border-top: 1px solid #2a2a2a;
-            padding-top: 1rem;
+        /* Add fade-in animation styles. Will be used for all <p> and other text containers */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 2s ease-in forwards;
         }
 
-        /* Smooth scrolling for better experience */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Add subtle fade-in animation for content */
         @keyframes fadeIn {
             from {
                 opacity: 0;
+                transformcx: translateY(20px);
             }
 
             to {
                 opacity: 1;
-            }
-        }
-
-        main {
-            animation: fadeIn 1s ease-in;
-        }
-
-        @keyframes fadeToLight {
-            0% {
-                background-color: #0a0a0a;
-                /* Dark background */
-                color: #d0d0d0;
-                /* Dark text */
-            }
-
-            100% {
-                background-color: #ffffff;
-                /* Light background */
-                color: #000000;
-                /* Dark text for light theme */
-            }
-        }
-
-        @keyframes fadeToLightHeadings {
-            0% {
-                color: #9370DB;
-                /* Dark purple */
-            }
-
-            100% {
-                color: #111;
-                /* Dark gray for light theme */
-            }
-        }
-
-        @keyframes fadeToLightLinks {
-            0% {
-                color: #4fd1c5;
-                /* Dark teal */
-            }
-
-            100% {
-                color: #2563eb;
-                /* Blue for light theme */
+                transform: translateY(0);
             }
         }
     </style>
@@ -175,6 +138,8 @@
     </nav>
     <main class="content">
         <h1>The Presence of Darkness</h1>
+
+        <div class="creation-date">Last updated: December 8, 2024</div>
 
         <p>In the previous article, I explored the similarities in the biblical stories related to baptism. Upon further
             reflection, I noticed a recurring theme of darkness that appears before significant moments of divine
@@ -292,12 +257,102 @@
     </main>
 
     <footer class="content" style="margin-top: 2rem; font-size: 0.9rem; text-align: center;">
-        <p>Last updated: December 8, 2024</p>
+
     </footer>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"
-        integrity="sha256-pRF3z5Mlj3umyreGAqHEF2MJdC+QVl7D2RTKHYpGYmc=" crossorigin="anonymous"></script>
-    <script>$(document).foundation();</script>
+        crossorigin="anonymous"></script>
+    <script defer>
+        $(document).foundation();
+
+        document.addEventListener('DOMContentLoaded', async function () {
+            // Apply fade-in animation to each word in <h1 /> with some time gap
+            await showHeading1();
+
+            await turnTolight();
+
+            await moveHeading1ToTop();
+
+            await showAllText();
+
+            async function showHeading1() {
+                // Wrap each word in <span /> and add class 'fade-in'
+                const h1 = document.querySelector('h1');
+                const text = h1.textContent;
+                const words = text.split(' ');
+                h1.innerHTML = words.map(word => `<span class="text-to-light">${word}</span>`).join(' ');
+
+                // Apply animation delay in 400ms intervals
+                const spans = h1.querySelectorAll('span');
+                spans.forEach((span, index) => {
+                    span.style.animationDelay = `${index * 400}ms`;
+                });
+
+                // Wait for all animations to complete
+                const lastDelay = (spans.length - 1) * 400 + 5000; // Last word delay + animation duration
+
+                // Note: not sure why, but it seems Promise below is not waited
+                return new Promise(resolve => setTimeout(resolve, lastDelay));
+            }
+
+            async function turnTolight() {
+                const h1 = document.querySelector('h1');
+
+                // Create white shadow of all words in h1
+                let spans = document.querySelectorAll('h1 > span');
+                spans.forEach(s => {
+                    // Note: Not working
+                    s.classList.add('shadow-to-shine');
+                });
+
+                // Set elements to to light mode
+                let toLigthElements = document.querySelectorAll('html, body, div, h1, h2, h3, p, main, footer, blockquote, nav, h1 span, .top-nav, .top-nav a');
+                toLigthElements.forEach(el => {
+                    el.classList.add('to-light');
+                });
+
+                return new Promise(resolve => {
+                    setTimeout(() => {
+                        // After animation finish, apply class to turn elements to `light-theme`
+                        toLigthElements.forEach(el => {
+                            el.classList.add('light-theme');
+                        })
+
+                        resolve();
+                    }, 3000)
+                });
+            }
+
+            async function moveHeading1ToTop() {
+                const h1 = document.querySelector('h1');
+                h1.style.transition = 'all 2s';
+                h1.style.marginTop = '0rem';
+                h1.style.fontSize = '2.6rem';
+                return new Promise(resolve => setTimeout(resolve, 2000));
+            }
+
+            async function showAllText() {
+                const timeGap = 400; // milliseconds
+                // Get all elements inside 'main' excepts 'h1'
+                let elements = Array.from(document.querySelectorAll('main > *'))
+                    .filter(el => el.tagName !== 'H1')
+                //  Apply animation to elements with time difference
+                elements.forEach((el, i) => {
+                    setTimeout(() => {
+                        el.classList.add('fade-in');
+                    }, timeGap * i);
+                })
+
+                // Wait for all animation to complete
+                let lastDelay = (elements - 1) * timeGap + 3000; // '3000', because animation lasts for 3 seconds.
+
+                return new Promise(resolve => setTimeout(resolve, lastDelay));
+            }
+
+
+        });
+
+    </script>
 </body>
 
 </html>
