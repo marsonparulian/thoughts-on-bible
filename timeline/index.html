@@ -17,7 +17,7 @@
         <div id="timeline">
             <!-- Note: The `id` in the `.n` elements, used to ease node traversing in development only. No use in production -->
 
-            <div class="n" id="creation-garden-of-eden">
+            <div class="n" id="creation-garden-of-eden" data-step="0">
                 <div class="date"></div>
                 <div class="k">Creation, Garden of Eden</div>
                 <div class="b">
@@ -34,7 +34,8 @@
                         allowed to eat from the tree of life.</p>
                 </div>
             </div>
-            <div class="n" id="noah-great-flood">
+
+            <div class="n" id="noah-great-flood" data-step="0">
                 <div class="date"></div>
                 <div class="k">Noah, Great Flood</div>
                 <div class="b">
@@ -71,7 +72,7 @@
                 </div>
             </div>
 
-            <div class="n" id="abraham">
+            <div class="n" id="abraham" data-step="0">
                 <div class="date">~2000 BC</div>
                 <div class="k">Abraham</div>
                 <div class="b">
@@ -286,7 +287,7 @@
             </div>
 
 
-            <div class="n" id="jesus">
+            <div class="n" id="jesus" data-step="0">
                 <div class="date">~3 BC</div>
                 <div class="k">Jesus</div>
                 <div class="b">
@@ -309,90 +310,6 @@
                 </div>
             </div>
 
-
-            <div class="n">
-                <div class="date"></div>
-                <div class="k"></div>
-                <div class="b">
-                    <button class="button hollow small secondary">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-                <div class="detail">
-                    <!-- contain detail info, will be shown in pop up -->
-                </div>
-            </div>
-
-
-            <div class="n">
-                <div class="date"></div>
-                <div class="k"></div>
-                <div class="b">
-                    <button class="button hollow small secondary">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-                <div class="detail">
-                    <!-- contain detail info, will be shown in pop up -->
-                </div>
-            </div>
-
-
-            <div class="n">
-                <div class="date"></div>
-                <div class="k"></div>
-                <div class="b">
-                    <button class="button hollow small secondary">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-                <div class="detail">
-                    <!-- contain detail info, will be shown in pop up -->
-                </div>
-            </div>
-
-
-            <div class="n">
-                <div class="date"></div>
-                <div class="k"></div>
-                <div class="b">
-                    <button class="button hollow small secondary">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-                <div class="detail">
-                    <!-- contain detail info, will be shown in pop up -->
-                </div>
-            </div>
-
-
-            <div class="n">
-                <div class="date"></div>
-                <div class="k"></div>
-                <div class="b">
-                    <button class="button hollow small secondary">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-                <div class="detail">
-                    <!-- contain detail info, will be shown in pop up -->
-                </div>
-            </div>
-
-
-            <div class="n">
-                <div class="date"></div>
-                <div class="k"></div>
-                <div class="b">
-                    <button class="button hollow small secondary">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-                <div class="detail">
-                    <!-- contain detail info, will be shown in pop up -->
-                </div>
-            </div>
-
             <!-- Start of node skeleton -->
             <div class="n">
                 <div class="date"></div>
@@ -408,76 +325,20 @@
             </div>
 
 
-            <div class="n">
-                <div class="date"></div>
-                <div class="k"></div>
-                <div class="b">
-                    <button class="button hollow small secondary">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-                <div class="detail">
-                    <!-- contain detail info, will be shown in pop up -->
-                </div>
-            </div>
 
-
-            <div class="n">
-                <div class="date"></div>
-                <div class="k"></div>
-                <div class="b">
-                    <button class="button hollow small secondary">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-                <div class="detail">
-                    <!-- contain detail info, will be shown in pop up -->
-                </div>
-            </div>
-
-
-            <div class="n">
-                <div class="date"></div>
-                <div class="k"></div>
-                <div class="b">
-                    <button class="button hollow small secondary">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-                <div class="detail">
-                    <!-- contain detail info, will be shown in pop up -->
-                </div>
-            </div>
-
-
-            <div class="n">
-                <div class="date"></div>
-                <div class="k"></div>
-                <div class="b">
-                    <button class="button hollow small secondary">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-                <div class="detail">
-                    <!-- contain detail info, will be shown in pop up -->
-                </div>
-            </div>
-
-
-            <div class="n">
-                <div class="date"></div>
-                <div class="k"></div>
-                <div class="b">
-                    <button class="button hollow small secondary">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-                <div class="detail">
-                    <!-- contain detail info, will be shown in pop up -->
-                </div>
-            </div>
             <!-- end of timeline container -->
         </div>
+
+        <nav id="timeline-nav">
+            <button class="button hollow " id="timeline-prev">
+                <i class="fas fa-arrow-left"></i>
+                prev
+            </button>
+            <button class="button hollow " id="timeline-next">
+                <i class="fas fa-arrow-right"></i>
+                next
+            </button>
+        </nav>
     </main>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

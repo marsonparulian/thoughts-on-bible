@@ -2,11 +2,29 @@ header {
     text-align: center;
 }
 
+#timeline-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin: 16px 0 4px;
+}
+
+#timeline-nav button {
+    background-color: white;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+}
+
 #timeline {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 16px;
+    /* allow space for nav at the bottom  */
+    padding-bottom: 62px;
 }
 
 /* timeline node */
@@ -20,8 +38,8 @@ header {
     position: relative;
 }
 
-/* `data-step` attribute is used to hide the node when the step is not reached yet. */
-.n[data-step] {
+/* Hide all `node` at first */
+.n[data-step]:not(.show) {
     display: none;
 }
 
@@ -54,4 +72,40 @@ header {
     margin: 0 2px;
     padding: 2px 4px;
     font-size: 0.8em;
+}
+
+/* Classes to animate `node` */
+
+/* Initial animation */
+.n.show.init {
+    animation: popup 0.3s ease-out forwards;
+}
+
+@keyframes popup {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Added by user action */
+.n.show.added {
+    animation: slidein 0.3s ease-out forwards;
+}
+
+@keyframes slidein {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }

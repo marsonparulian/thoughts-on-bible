@@ -1,17 +1,42 @@
-
-
 $(document).ready(function () {
     $(document).foundation();
+
+    /**
+    * Note:
+    * `node` is the element that probably has `data-step` attribute. It will be shown or hidden based on the `step` value.
+    * `step` will show all `node` elements that has `data-step` value <= to the given `step` value.
+    * `maxStep` is the maximum value of `data-step` attribute from `.n` elements.
+    * `stepObject` is an object that contains `step` value and array of related `node`.
+    * `stepSeries` is a list of `stepObject`. Each `stepObject` contains `step` value and array of related `node`.
+    * `indexMaxShownStepObject` is the index of the `stepObject` in `stepSeries`, which `stepObject.step` === `step`.
+    */
 
     // Set `step` from the searchParam or set to 0
     let url = new URL(window.location.href);
     let step = url.searchParams.get('step');
-    step ??= 0;
+    step = parseInt(step) || 0;
 
-    // Setup `step` related data
+    // Setup all `step` related data
     const stepSeries = constructStepSeries();
+    const maxStep = stepSeries[stepSeries.length - 1].step;
+    step = normalizeStep(step);
+    let indexMaxShownStepObject = stepSeries.findIndex(stepObject => stepObject.step === step);
 
-    // console.log(`step : ${step}`);
+    // Ref to the prev and next buttons
+    const prevButton = document.querySelector('#timeline-prev');
+    const nextButton = document.querySelector('#timeline-next');
+
+
+    // Attach event listener to the previous button
+    prevButton.addEventListener('click', previousStep);
+    // Attach event listener to the next button
+    nextButton.addEventListener('click', nextStep);
+
+    // Set states for the nav buttons
+    setNavButtonState(step, prevButton, nextButton);
+
+    // Ready to show the timeline
+    setStep(step);
 
     /**
      * Construct list of `step`. Each `step` contains array of `node`.
@@ -19,11 +44,14 @@ $(document).ready(function () {
      */
     function constructStepSeries() {
         // Collect all values of `data-step`
-        let steps = Array.from(document.querySelectorAll('[data-step]')).map(node => node.getAttribute('data-step'));
+        // let steps = Array.from(document.querySelectorAll('[data-step]')).map(node => node.getAttribute('data-step'));
+        let steps = Array.from(document.querySelectorAll('.n')).map(node => node.getAttribute('data-step'));
+
+        // Convert the values to number
+        steps = steps.map(step => parseInt(step) || 0);
 
         // Remove duplicate values
         steps = Array.from(new Set(steps));
-        console.log(steps);
 
         // Order the `data-step` values ascending
         steps.sort((a, b) => a - b);
@@ -36,26 +64,120 @@ $(document).ready(function () {
             };
         });
 
-        console.log(stepSeries);
+        return stepSeries;
+    }
+
+    /**
+     * Normalize the `step` value to match the `stepSeries`. `step` value should be the max value of all the `step` values <= the given `step` value.
+     * @param {number} step Current step value
+     * @return {number} Normalized step value
+     */
+    function normalizeStep(step) {
+        let normalizedStep = 0;
+
+        stepSeries.forEach(stepData => {
+            if (stepData.step <= step) {
+                normalizedStep = stepData.step;
+            }
+        });
+
+        return normalizedStep;
+    }
+
+    /**
+     * Handler for the previous button
+     */
+    function previousStep() {
+        // FailSafe: If the current step is the first step, then do nothing
+        if (indexMaxShownStepObject === 0) return;
+
+        // Move to the previous stepObject in the stepSeries
+        indexMaxShownStepObject--;
+
+        onStepChanged(stepSeries[indexMaxShownStepObject].step);
     }
     /**
      * Decide what is the next step
      */
     function nextStep() {
-        // TODO Decide what is the next step based on the current step value
-        let nextStep = 999;
+        // FailSafe: If the current step is the last step, then do nothing
+        if (indexMaxShownStepObject === stepSeries.length - 1) return;
 
-        set(nextStep)
+        // Decide what is the next step based on the current step value
+        // Move to the next stepObject in the stepSeries
+        indexMaxShownStepObject++;
+
+        onStepChanged(stepSeries[indexMaxShownStepObject].step);
     }
     /**
-     * Set the current step 
+     * Execute side effects of `step` changed by prev / next button.
      */
-    function setStep(step) {
+    function onStepChanged(newStep) {
         // TODO Show all `node` elements which should be shown based on the step value
 
+        // Set the current step
+        step = newStep;
 
         // Set the current step in the URL
+        reflectStepInURL(step);
+
+        // Set state of the nav buttons
+        setNavButtonState(step);
+    }
+    /**
+     * Set the current step, based on the given `step` value (from URL)
+     * @param {number} step Current step value
+     */
+    function setStep(step) {
+        // Show all `node` elements that has `step` value less than or equal to the given `step` value
+        stepSeries.forEach(stepObject => {
+            console.log(`stepObject.step: ${stepObject.step} vs step: ${step}`);
+            if (stepObject.step <= step) {
+                console.log(stepObject)
+                stepObject.nodes.forEach(node => {
+                    console.log(`addd class show-init`)
+                    node.classList.add('show');
+                    node.classList.add('init');
+                });
+            }
+        });
+
+        // Set state of the nav buttons
+        setNavButtonState(step);
+    }
+    /**
+     * Reflect the current step in the URL
+     * @param {number} step Current step value
+     */
+    function reflectStepInURL(step) {
+        const url = new URL(window.location.href);
         url.searchParams.set('step', step);
+        // window.history.pushState({}, '', url);
         window.history.replaceState({}, '', url);
+    }
+
+    /**
+     * Set the state of the nav buttons
+     * @param {number} step Current step value
+     */
+    function setNavButtonState(step) {
+        // Enable or disable the previous button based on the current step value
+        if (step === 0) {
+            prevButton.disabled = true;
+            console.log('prev step is disabled');
+        } else {
+            prevButton.disabled = false;
+        }
+
+        // Enable or disable the next button based on the current step value
+        if (step >= maxStep) {
+            nextButton.disabled = true;
+            console.log('next step is disabled');
+        } else {
+            nextButton.disabled = false;
+        }
+        console.log(`max step: ${maxStep}`);
+        console.log(`current step : ${step}`);
+        console.log(`typeof step: ${typeof step}`);
     }
 });
