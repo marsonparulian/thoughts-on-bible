@@ -20,13 +20,23 @@ $(document).ready(function () {
     function constructStepSeries() {
         // Collect all values of `data-step`
         let steps = Array.from(document.querySelectorAll('[data-step]')).map(node => node.getAttribute('data-step'));
-        console.log(steps);
 
         // Remove duplicate values
+        steps = Array.from(new Set(steps));
+        console.log(steps);
 
         // Order the `data-step` values ascending
+        steps.sort((a, b) => a - b);
 
         // Query all `node`s with the same `data-step` value and group them in the same `step`
+        const stepSeries = steps.map(step => {
+            return {
+                step: step,
+                nodes: Array.from(document.querySelectorAll(`[data-step="${step}"]`))
+            };
+        });
+
+        console.log(stepSeries);
     }
     /**
      * Decide what is the next step

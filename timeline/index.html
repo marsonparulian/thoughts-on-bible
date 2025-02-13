@@ -15,6 +15,8 @@
     </header>
     <main>
         <div id="timeline">
+            <!-- Note: The `id` in the `.n` elements, used to ease node traversing in development only. No use in production -->
+
             <div class="n" id="creation-garden-of-eden">
                 <div class="date"></div>
                 <div class="k">Creation, Garden of Eden</div>
@@ -47,8 +49,30 @@
                 </div>
             </div>
 
+            <div class="n" id="tower-of-babel" data-step="100">
+                <div class="date"></div>
+                <div class="k">Tower of Babel, Nimrod</div>
+                <div class="b">
+                    <button class="button hollow small secondary">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="detail">
+                    <!-- contain detail info, will be shown in pop up -->
+                    <h3>Nimrod</h3>
+                    <p>Nimrod was a mighty hunter and a king of Babylon. He built the city of Babel and the tower that
+                        reached the heavens.</p>
+
+                    <h3>Tower of Babel</h3>
+                    <p>
+                        People tried to build a tower to reach the heavens, but God confused their languages and
+                        scattered them across the earth.
+                    </p>
+                </div>
+            </div>
+
             <div class="n" id="abraham">
-                <div class="date">~1000 BC</div>
+                <div class="date">~2000 BC</div>
                 <div class="k">Abraham</div>
                 <div class="b">
                     <button class="button hollow small secondary">
@@ -116,9 +140,9 @@
                 </div>
             </div>
 
-            <div class="n" id="moses-red-sea-10-commandments" data-step="40">
+            <div class="n" id="moses-red-sea" data-step="40">
                 <div class="date">~1500 BC</div>
-                <div class="k">Moses, Red Sea, 10 Commandments</div>
+                <div class="k">Moses, Red Sea</div>
                 <div class="b">
                     <button class="button hollow small secondary">
                         <i class="fas fa-arrow-right"></i>
@@ -136,16 +160,57 @@
                     <p>God parted the Red Sea so that the Israelites could escape from the pursuing Egyptian army. The
                         waters returned to their place, drowning the Egyptians.</p>
 
-                    <h3>10 Commandments</h3>
-                    <p>Moses received the Ten Commandments from God on Mount Sinai. These laws were written on stone
-                        tablets and given to the Israelites as a covenant between them and God.</p>
+
                 </div>
             </div>
 
+            <div class="n" id="10-commandments" data-step="45">
+                <div class="date"></div>
+                <div class="k">Ten Commandments</div>
+                <div class="b">
+                    <button class="button hollow small secondary">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="detail">
+                    <!-- contain detail info, will be shown in pop up -->
+                    <h3>10 Commandments</h3>
+                    <p>
+                        Moses received the Ten Commandments from God on Mount Sinai. These laws were written on stone
+                        tablets and given to the Israelites as a covenant between them and God.
+                    </p>
+                </div>
+            </div>
 
-            <div class="n" id="kingdom-of-israel-king-david" data-step="50">
+            <div class="n" id="tabernacle" data-step="170">
+                <div class="date"></div>
+                <div class="k">Tabernacle</div>
+                <div class="b">
+                    <button class="button hollow small secondary">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="detail">
+                    <!-- contain detail info, will be shown in pop up -->
+                </div>
+            </div>
+
+            <div class="n" id="judges" data-step="200">
+                <div class="date"></div>
+                <div class="k">Time of Judges</div>
+                <div class="b">
+                    <button class="button hollow small secondary">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="detail">
+                    <!-- contain detail info, will be shown in pop up -->
+                </div>
+            </div>
+
+            <div class="n" id="kingdom-of-israel-king-david" data-step="150">
                 <div class="date">~1000 BC</div>
-                <div class="k">Kindom of Israel, King David</div>
+                <div class="k">Kingdom of Israel, King David</div>
                 <div class="b">
                     <button class="button hollow small secondary">
                         <i class="fas fa-arrow-right"></i>
@@ -159,6 +224,64 @@
                     <h3>King David</h3>
                     <p>David was a shepherd who became the second King. David is considered as the greatest king Israel
                         ever had.</p>
+                </div>
+            </div>
+
+            <div class="n" id="test-node" data-step="150">
+                <div class="date">~test BC</div>
+                <div class="k">Test Node</div>
+                <div class="b">
+                    <button class="button hollow small secondary">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="detail">
+                    <!-- contain detail info, will be shown in pop up -->
+                    <h3>Kingdom of Israel</h3>
+                    <p>Start of Kingdom of Israel with Saul as the first king.</p>
+
+                    <h3>King David</h3>
+                    <p>David was a shepherd who became the second King. David is considered as the greatest king Israel
+                        ever had.</p>
+                </div>
+            </div>
+
+            <div class="n" id="solomon" data-step="300">
+                <div class="date"></div>
+                <div class="k">Solomon</div>
+                <div class="b">
+                    <button class="button hollow small secondary">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="detail">
+                    <!-- contain detail info, will be shown in pop up -->
+                </div>
+            </div>
+
+            <div class="n" id="first-temple" data-step="350">
+                <div class="date"></div>
+                <div class="k">First Temple</div>
+                <div class="b">
+                    <button class="button hollow small secondary">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="detail">
+                    <!-- contain detail info, will be shown in pop up -->
+                </div>
+            </div>
+
+            <div class="n" id="israel-and-judah" data-step="400">
+                <div class="date"></div>
+                <div class="k">Israel (Northern), Judas (Southern)</div>
+                <div class="b">
+                    <button class="button hollow small secondary">
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="detail">
+                    <!-- contain detail info, will be shown in pop up -->
                 </div>
             </div>
 
@@ -270,7 +393,7 @@
                 </div>
             </div>
 
-
+            <!-- Start of node skeleton -->
             <div class="n">
                 <div class="date"></div>
                 <div class="k"></div>
