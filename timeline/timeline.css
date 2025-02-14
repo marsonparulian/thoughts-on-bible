@@ -76,6 +76,10 @@ header {
 
 /* Classes to animate `node` */
 
+.n.show {
+    /* display: block; */
+}
+
 /* Initial animation */
 .n.show.init {
     animation: popup 0.3s ease-out forwards;
@@ -93,9 +97,19 @@ header {
     }
 }
 
-/* Added by user action */
+/* Effected by user action */
 .n.show.added {
-    animation: slidein 0.3s ease-out forwards;
+    animation: slidein 0.3s ease-out forwards, highlight 4s ease-out forwards;
+}
+
+@keyframes highlight {
+    0% {
+        background-color: yellow;
+    }
+
+    100% {
+        background-color: white;
+    }
 }
 
 @keyframes slidein {
@@ -107,5 +121,20 @@ header {
     100% {
         transform: translateX(0);
         opacity: 1;
+    }
+}
+
+.n.show.remove {
+    animation: fadeout 0.3s ease-out forwards;
+}
+
+@keyframes fadeout {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
     }
 }

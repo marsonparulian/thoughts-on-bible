@@ -87,9 +87,25 @@ $(document).ready(function () {
     /**
      * Handler for the previous button
      */
-    function previousStep() {
+    async function previousStep() {
         // FailSafe: If the current step is the first step, then do nothing
         if (indexMaxShownStepObject === 0) return;
+
+        // Hide all `node` elements for the stepObject before move to the previous step
+        const stepObject = stepSeries[indexMaxShownStepObject];
+        for (let i = 0; i < stepObject.nodes.length; i++) {
+            const classList = stepObject.nodes[i].classList
+            // Note: the order of the class alteration is important.
+            classList.remove('init');
+            classList.remove('added');
+
+            classList.add('remove')
+            console.log('removing');
+
+            // classList.remove('show');
+
+            await new Promise(r => setTimeout(r, 200))
+        }
 
         // Move to the previous stepObject in the stepSeries
         indexMaxShownStepObject--;
@@ -99,7 +115,7 @@ $(document).ready(function () {
     /**
      * Decide what is the next step
      */
-    function nextStep() {
+    async function nextStep() {
         // FailSafe: If the current step is the last step, then do nothing
         if (indexMaxShownStepObject === stepSeries.length - 1) return;
 
@@ -107,16 +123,28 @@ $(document).ready(function () {
         // Move to the next stepObject in the stepSeries
         indexMaxShownStepObject++;
 
+        // Show all `node` elements which should be shown based on the step value
+        const stepObject = stepSeries[indexMaxShownStepObject];
+        for (let i = 0; i < stepObject.nodes.length; i++) {
+            const classList = stepObject.nodes[i].classList;
+            classList.remove('remove');
+            stepObject.nodes[i].classList.add('added');
+            // stepObject.nodes[i].classList.add('show');
+            await new Promise(r => setTimeout(r, 200))
+        }
+
         onStepChanged(stepSeries[indexMaxShownStepObject].step);
     }
     /**
      * Execute side effects of `step` changed by prev / next button.
      */
-    function onStepChanged(newStep) {
-        // TODO Show all `node` elements which should be shown based on the step value
-
+    async function onStepChanged(newStep) {
         // Set the current step
         step = newStep;
+
+        // TODO Hide all `node` elements which should be hidden based on the step value
+
+
 
         // Set the current step in the URL
         reflectStepInURL(step);
@@ -128,19 +156,19 @@ $(document).ready(function () {
      * Set the current step, based on the given `step` value (from URL)
      * @param {number} step Current step value
      */
-    function setStep(step) {
-        // Show all `node` elements that has `step` value less than or equal to the given `step` value
-        stepSeries.forEach(stepObject => {
-            console.log(`stepObject.step: ${stepObject.step} vs step: ${step}`);
-            if (stepObject.step <= step) {
-                console.log(stepObject)
-                stepObject.nodes.forEach(node => {
-                    console.log(`addd class show-init`)
-                    node.classList.add('show');
-                    node.classList.add('init');
-                });
+    async function setStep(step) {
+        // Show all `node` elements which should be shown based on the step value
+        // However the appearance shoud be by the order in HTML, not by the `data-step` value
+        let nodes = Array.from(document.querySelectorAll('.n[data-step]'));
+        for (let i = 0; i < nodes.length; i++) {
+            if (parseInt(nodes[i].getAttribute('data-step')) <= step) {
+                const classList = nodes[i].classList;
+                classList.remove('remove');
+                classList.add('init');
+                classList.add('show');
+                await new Promise(r => setTimeout(r, 200))
             }
-        });
+        }
 
         // Set state of the nav buttons
         setNavButtonState(step);
@@ -181,3 +209,4 @@ $(document).ready(function () {
         console.log(`typeof step: ${typeof step}`);
     }
 });
+
