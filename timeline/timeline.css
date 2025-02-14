@@ -38,8 +38,8 @@ header {
     position: relative;
 }
 
-/* Hide all `node` at first */
-.n[data-step]:not(.show) {
+/* Hide all `node`, who not `init` and `added` */
+.n[data-step]:not(.init):not(.added) {
     display: none;
 }
 
@@ -76,12 +76,9 @@ header {
 
 /* Classes to animate `node` */
 
-.n.show {
-    /* display: block; */
-}
-
 /* Initial animation */
-.n.show.init {
+/* .n.show.init { */
+.n.init {
     animation: popup 0.3s ease-out forwards;
 }
 
@@ -98,7 +95,8 @@ header {
 }
 
 /* Effected by user action */
-.n.show.added {
+/* .n.show.added { */
+.n.added {
     animation: slidein 0.3s ease-out forwards, highlight 4s ease-out forwards;
 }
 
@@ -124,7 +122,7 @@ header {
     }
 }
 
-.n.show.remove {
+.n.remove {
     animation: fadeout 0.3s ease-out forwards;
 }
 

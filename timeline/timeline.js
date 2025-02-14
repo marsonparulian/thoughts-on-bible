@@ -95,14 +95,16 @@ $(document).ready(function () {
         const stepObject = stepSeries[indexMaxShownStepObject];
         for (let i = 0; i < stepObject.nodes.length; i++) {
             const classList = stepObject.nodes[i].classList
-            // Note: the order of the class alteration is important.
-            classList.remove('init');
-            classList.remove('added');
 
+            // Add the `remove` class to apply animation
             classList.add('remove')
-            console.log('removing');
 
-            // classList.remove('show');
+            // Remove the `show` class after the animation ends to make sure the element is hidden
+            stepObject.nodes[i].addEventListener('animationend', function handler() {
+                classList.remove('init');
+                classList.remove('added');
+                stepObject.nodes[i].removeEventListener('animationend', handler);
+            });
 
             await new Promise(r => setTimeout(r, 200))
         }
@@ -128,8 +130,8 @@ $(document).ready(function () {
         for (let i = 0; i < stepObject.nodes.length; i++) {
             const classList = stepObject.nodes[i].classList;
             classList.remove('remove');
-            stepObject.nodes[i].classList.add('added');
-            // stepObject.nodes[i].classList.add('show');
+            classList.add('added');
+
             await new Promise(r => setTimeout(r, 200))
         }
 
