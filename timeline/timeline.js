@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $(document).foundation();
+    // $(document).foundation();
 
     /**
     * Note:
@@ -26,14 +26,13 @@ $(document).ready(function () {
     const prevButton = document.querySelector('#timeline-prev');
     const nextButton = document.querySelector('#timeline-next');
 
-
     // Attach event listener to the previous button
     prevButton.addEventListener('click', previousStep);
     // Attach event listener to the next button
     nextButton.addEventListener('click', nextStep);
 
-    // Set states for the nav buttons
-    setNavButtonState(step, prevButton, nextButton);
+    // Attach event listener for `.n .b button` to open Foundation's modal,
+    attachDetailButtonsHandler();
 
     // Ready to show the timeline
     setStep(step);
@@ -91,6 +90,10 @@ $(document).ready(function () {
         // FailSafe: If the current step is the first step, then do nothing
         if (indexMaxShownStepObject === 0) return;
 
+        // Scroll to the `node` before the first `node` that going to e hidden, or scroll to the top `node`
+        await scrollToThePreviousNode();
+
+
         // Hide all `node` elements for the stepObject before move to the previous step
         const stepObject = stepSeries[indexMaxShownStepObject];
         for (let i = 0; i < stepObject.nodes.length; i++) {
@@ -137,6 +140,32 @@ $(document).ready(function () {
 
         onStepChanged(stepSeries[indexMaxShownStepObject].step);
     }
+
+    /**
+     * Scroll to the `node` before the first `node` that going to be hidden, or scroll to the top `node`
+     */
+    async function scrollToThePreviousNode() {
+        // Get the index before the stepObject which nodes are going to be hidden, or get the first index
+        // const indexStepToShow = indexMaxShownStepObject - 1 || 0;
+        const indexStepToShow = indexMaxShownStepObject;
+
+        // Get the first `node`, which will be scrolled too
+        const nodeToScroll = stepSeries[indexStepToShow].nodes[0];
+
+        // addEventListener('scroll', function scrollEndHandler(e) {
+        //     scrollTimeout = setTimeout(function () {
+        //         console.log('Scroll ended');
+        //     }, 100);
+        // });
+
+        nodeToScroll.scrollIntoView({ behavior: 'smooth' });
+
+        // TODO: If the `node` already in the view, do not need to scrool and wait
+
+        // Return promise to wait sometimes to finish scrolling
+        return new Promise(r => setTimeout(r, 500));
+    }
+
     /**
      * Execute side effects of `step` changed by prev / next button.
      */
@@ -206,9 +235,37 @@ $(document).ready(function () {
         } else {
             nextButton.disabled = false;
         }
-        console.log(`max step: ${maxStep}`);
-        console.log(`current step : ${step}`);
-        console.log(`typeof step: ${typeof step}`);
+        // console.log(`max step: ${maxStep}`);
+        // console.log(`current step : ${step}`);
+        // console.log(`typeof step: ${typeof step}`);
     }
+
+    /**
+     * Attach event listener for `.n .b button` to open Foundation's modal, 
+     * and clone the content of `.n .detail` to the Foundation's modal.
+     * The modal is hidden by default.
+     */
+    function attachDetailButtonsHandler() {
+
+        let modal = new Foundation.Reveal($('#modal'));
+
+        $('.n .b button').on('click', function (e) {
+            e.preventDefault();
+
+            const titleContent = $(this).closest('.n').find('.k').html();
+            const dateContent = $(this).closest('.n').find('.date').html();
+            const detailContent = $(this).closest('.n').find('.detail').html();
+
+            $('#modal h1').html(titleContent);
+            $('#modal .lead').html(dateContent);
+            $('#modal .content').html(detailContent);
+
+
+            // new Foundation.Reveal($('#modal')).open();
+            // $('#modal').foundation('open');
+            modal.open();
+        });
+    }
+
 });
 

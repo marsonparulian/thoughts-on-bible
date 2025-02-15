@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Bible Timeline</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/css/foundation.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.9.0/css/foundation.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="timeline.css">
 </head>
@@ -113,7 +113,7 @@
 
             <div class="n" id="jacob-israel-12-tribes" data-step="30">
                 <div class="date"></div>
-                <div class="k">Jacob, Israel, 12 tribes</div>
+                <div class="k">Jacob / Israel, 12 tribes</div>
                 <div class="b">
                     <button class="button hollow small secondary">
                         <i class="fas fa-arrow-right"></i>
@@ -193,7 +193,7 @@
                     </button>
                 </div>
                 <div class="detail">
-                    <!-- contain detail info, will be shown in pop up -->
+                    <p>No content available</p>
                 </div>
             </div>
 
@@ -206,7 +206,7 @@
                     </button>
                 </div>
                 <div class="detail">
-                    <!-- contain detail info, will be shown in pop up -->
+                    <p>No content available</p>
                 </div>
             </div>
 
@@ -239,7 +239,7 @@
                     </button>
                 </div>
                 <div class="detail">
-                    <!-- contain detail info, will be shown in pop up -->
+                    <p>No content available</p>
                 </div>
             </div>
 
@@ -252,20 +252,20 @@
                     </button>
                 </div>
                 <div class="detail">
-                    <!-- contain detail info, will be shown in pop up -->
+                    <p>No content available</p>
                 </div>
             </div>
 
-            <div class="n" id="israel-and-judah" data-step="400">
+            <div class="n" id="israel-kingdom-split" data-step="400">
                 <div class="date"></div>
-                <div class="k">Israel (Northern), Judas (Southern)</div>
+                <div class="k">Israel Kingdom Split</div>
                 <div class="b">
                     <button class="button hollow small secondary">
                         <i class="fas fa-arrow-right"></i>
                     </button>
                 </div>
                 <div class="detail">
-                    <!-- contain detail info, will be shown in pop up -->
+                    <p>No content available</p>
                 </div>
             </div>
 
@@ -324,8 +324,23 @@
         </nav>
     </main>
 
+    <div id="modal" class="reveal" data-reveal>
+        <header>
+            <h1></h1>
+            <div class="lead"></div>
+        </header>
+        <hr />
+        <div class="content">
+        </div>
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/foundation.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.9.0/js/foundation.min.js"
+        integrity="sha512-P4f0g0iAkyfUF2V2VX8dxkoBxPLULaV2TM8HQGXFRb75AzLVAf+sn+MRweu/C81rL2JaYutbY6cWAbmwJbtOcg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="timeline.js"></script>
 </body>
 
