@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    // $(document).foundation();
+    $(document).foundation();
 
     /**
     * Note:
@@ -247,7 +247,7 @@ $(document).ready(function () {
      */
     function attachDetailButtonsHandler() {
 
-        let modal = new Foundation.Reveal($('#modal'));
+        // let modal = new Foundation.Reveal($('#modal'));
 
         $('.n .b button').on('click', function (e) {
             e.preventDefault();
@@ -256,16 +256,26 @@ $(document).ready(function () {
             const dateContent = $(this).closest('.n').find('.date').html();
             const detailContent = $(this).closest('.n').find('.detail').html();
 
-            $('#modal h1').html(titleContent);
-            $('#modal .lead').html(dateContent);
-            $('#modal .content').html(detailContent);
-
+            $('#detail-modal h1').html(titleContent);
+            $('#detail-modal .lead').html(dateContent);
+            $('#detail-modal .content').html(detailContent);
 
             // new Foundation.Reveal($('#modal')).open();
             // $('#modal').foundation('open');
-            modal.open();
+            // modal.open();
         });
+
+        /**
+         * Custom handler to close the modal
+         */
+        $('#modal .other-close-button').on('click', () => {
+            // modal.close();
+        });
+
     }
+
+
+
 
 });
 

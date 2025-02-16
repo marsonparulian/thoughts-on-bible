@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundation 6 Modal Example</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css">
+</head>
+
+<body>
+
+
+
+    <button class="button" data-open="modal234">Open Modal 2</button>
+    <div class="reveal" id="modal234" data-reveal>
+        <h1>Modal Title</h1>
+        <p>This is a basic modal example using Foundation 6.</p>
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+
+    <!-- Button to trigger modal -->
+
+    <button class="button" data-open="exampleModal">Open Modal</button>
+    <div class="reveal" id="exampleModal" data-reveal>
+        <h1>Modal Title</h1>
+        <p>This is a basic modal example using Foundation 6.</p>
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+
+
+    <div class="n">
+        <div class="b">
+            <button class="button" data-open="modal4343">New Button</button>
+        </div>
+    </div>
+
+    <div id="modal4343" class="reveal " data-reveal>
+        <header>
+            <h1></h1>
+            <div class="lead"></div>
+        </header>
+        <hr />
+        <div class="content">
+        </div>
+        <button class="close-button" data-close aria-label="Close modal" type="button">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <button class="other-close-button" role="button">Close</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js"></script>
+    <script>
+        $(document).ready(() => {
+            $(document).foundation();
+
+            // let modal = new Foundation.Reveal($('#modal4343'));
+            // let modal = new Foundation.Reveal($('#modal234'));
+
+            $('.n .b button').on('click', function (e) {
+                e.preventDefault();
+
+                const titleContent = "title";
+                const dateContent = "date";
+                const detailContent = "detail";
+
+                $('#modal4343 h1').html(titleContent);
+                $('#modal4343 .lead').html(dateContent);
+                $('#modal4343 .content').html(detailContent);
+
+                // new Foundation.Reveal($('#modal')).open();
+                // $('#modal').foundation('open');
+
+                console.log('open button');
+                // modal.open();
+            });
+
+            /**
+             * Custom handler to close the modal
+             */
+            $('#modal4343 .other-close-button').on('click', () => {
+                // modal.close();
+            });
+
+        });
+    </script>
+</body>
+
+</html>
