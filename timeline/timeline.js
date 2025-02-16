@@ -90,9 +90,8 @@ $(document).ready(function () {
         // FailSafe: If the current step is the first step, then do nothing
         if (indexMaxShownStepObject === 0) return;
 
-        // Scroll to the `node` before the first `node` that going to e hidden, or scroll to the top `node`
+        // Scroll to the `node` to be removed
         await scrollToThePreviousNode();
-
 
         // Hide all `node` elements for the stepObject before move to the previous step
         const stepObject = stepSeries[indexMaxShownStepObject];
@@ -123,6 +122,9 @@ $(document).ready(function () {
     async function nextStep() {
         // FailSafe: If the current step is the last step, then do nothing
         if (indexMaxShownStepObject === stepSeries.length - 1) return;
+
+        // Scroll to the `node`s to be inserted
+        await scrollToThePreviousNode();
 
         // Decide what is the next step based on the current step value
         // Move to the next stepObject in the stepSeries
