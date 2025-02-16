@@ -135,7 +135,9 @@ header {
 
 .n.remove {
     background-color: yellow;
-    animation: fadeout 2.5s ease-out forwards;
+    /* animation: fadeout 2.5s ease-out forwards; */
+    animation: slideout 0.3s ease-out forwards;
+    animation-delay: 2s;
 }
 
 @keyframes fadeout {
@@ -146,5 +148,17 @@ header {
     100% {
         opacity: 0;
         transform: scale(0.5);
+    }
+}
+
+@keyframes slideout {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(100%);
+        opacity: 0;
     }
 }

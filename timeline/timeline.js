@@ -164,8 +164,8 @@ $(document).ready(function () {
 
         // TODO: If the `node` already in the view, do not need to scrool and wait
 
-        // Return promise to wait sometimes to finish scrolling
-        return new Promise(r => setTimeout(r, 500));
+        // The 'waiting' for scroll to finish, will be done in CSS `animation-delay` for both 'previous' and 'next'
+        return Promise.resolve();
     }
 
     /**
