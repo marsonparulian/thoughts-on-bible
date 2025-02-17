@@ -127,7 +127,7 @@ $(document).ready(function () {
         if (indexMaxShownStepObject === stepSeries.length - 1) return;
 
         // Scroll to the `node`s to be inserted
-        await scrollToTheFocusedNode();
+        await scrollToTheFocusedNode(true);
 
         // Move to the next stepObject in the stepSeries
         indexMaxShownStepObject++;
@@ -146,21 +146,33 @@ $(document).ready(function () {
     }
 
     /**
-     * Scroll to the first `node` that is going to be hidden or to be shown
+     * Scroll to the first `node` that is going to be hidden or to be shown.
+     * Set param `prevNode` to true to avoid glitch, happened when 'next' button is clicked, and the focus node is outside the view / window.
+     * @param prevNode boolean - If set to true, focus will be set to the `.n` before the current focus node. 
      */
-    async function scrollToTheFocusedNode() {
+    async function scrollToTheFocusedNode(prevNode = false) {
         // Get the index before the stepObject which nodes are going to be hidden, or get the first index
         const indexFocusedStep = indexMaxShownStepObject;
 
-        // Get the first `node`, which will be scrolled too
-        const nodeToScroll = stepSeries[indexFocusedStep].nodes[0];
+        // Get the first currently focused `node`s
+        let nodeToScroll = stepSeries[indexFocusedStep].nodes[0];
+
+        // Set the `node` to scroll to
+        if (prevNode) {
+            // Get the previous `node` of the next focused `node`
+            const nextFocusedNode = stepSeries[indexFocusedStep + 1].nodes[0];
+            nodeToScroll = nextFocusedNode.previousElementSibling || nodeToScroll;
+            console.log('prev node --');
+            console.log(`id: ${nodeToScroll.id}`);
+        }
 
         nodeToScroll.scrollIntoView({ behavior: 'smooth' });
 
         // TODO: If the `node` already in the view, do not need to scrool and wait
 
         // No need to wait. The 'waiting' for scroll to finish, will be done in CSS `animation-delay` for both 'previous' and 'next'
-        return Promise.resolve();
+        // return Promise.resolve();
+        return new Promise(r => setTimeout(r, 800));
     }
 
     /**
@@ -215,7 +227,6 @@ $(document).ready(function () {
         // Enable or disable the previous button based on the current step value
         if (step === 0) {
             prevButton.disabled = true;
-            console.log('prev step is disabled');
         } else {
             prevButton.disabled = false;
         }

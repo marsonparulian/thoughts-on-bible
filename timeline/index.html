@@ -17,6 +17,11 @@
     <main class="grid-x align-center">
         <div id="timeline" class="cell small-12 medium-8 large-6">
             <!-- Note: The `id` in the `.n` elements, used to ease node traversing in development only. No use in production -->
+            <!-- `data-step` groups: 
+            100 - start of first layer: main figures and big era such First Temple, Kingdom split etc.
+            500 - start of second layer: Famous events related to the figures in first layer, such as Tabernacle, Pentacost
+            1000 - start of third layer: Figures like judges and prophets
+            -->
 
             <div class="n" id="creation-garden-of-eden" data-step="0">
                 <div class="date"></div>
@@ -92,7 +97,7 @@
                 </div>
             </div>
 
-            <div class="n" id="isaac" data-step="20">
+            <div class="n" id="isaac" data-step="120">
                 <div class="date"></div>
                 <div class="k">Isaac</div>
                 <div class="b">
@@ -112,7 +117,7 @@
                 </div>
             </div>
 
-            <div class="n" id="jacob-israel-12-tribes" data-step="30">
+            <div class="n" id="jacob-israel-12-tribes" data-step="140">
                 <div class="date"></div>
                 <div class="k">Jacob / Israel, 12 tribes</div>
                 <div class="b">
@@ -143,31 +148,100 @@
                 </div>
             </div>
 
-            <div class="n" id="moses-red-sea" data-step="40">
-                <div class="date">~1500 BC</div>
-                <div class="k">Moses, Red Sea Parting</div>
+            <div class="n" id="israel-move-to-egypt" data-step="160">
+                <div class="date"></div>
+                <div class="k"> Israel Move to Egypt</div>
                 <div class="b">
                     <button class="button small secondary" data-open="detail-modal"">
                         <i class=" fas fa-arrow-right"></i>
                     </button>
                 </div>
                 <div class="detail">
-                    <!-- contain detail info, will be shown in pop up -->
-                    <h3>Moses</h3>
-                    <p>Moses was born in Egypt during a time when the Israelites were enslaved. He was raised by
-                        Pharaoh's
-                        daughter but later fled to Midian after killing an Egyptian. God called Moses to lead the
-                        Israelites out of Egypt.</p>
-
-                    <h3>Red Sea</h3>
-                    <p>God parted the Red Sea so that the Israelites could escape from the pursuing Egyptian army. The
-                        waters returned to their place, drowning the Egyptians.</p>
-
-
+                    <p>No content available</p>
                 </div>
             </div>
 
-            <div class="n" id="10-commandments" data-step="45">
+            <div class="n" id="moses" data-step="170">
+                <div class="date"></div>
+                <div class="k">Moses</div>
+                <div class="b">
+                    <button class="button small secondary" data-open="detail-modal"">
+                        <i class=" fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="detail">
+                    <h3>Moses' Birth</h3>
+                    <p>
+                        During a time of great oppression, the Pharaoh of Egypt ordered that all newborn Hebrew boys be
+                        thrown into the Nile to control the growing Israelite population. Jochebed, a Hebrew woman, gave
+                        birth to a son and, seeing his beauty and promise, hid him for three months. When she could no
+                        longer keep him hidden, she placed him in a basket made of reeds and set it afloat on the Nile,
+                        trusting God to protect him. His sister, Miriam, watched from a distance, hoping for a miracle.
+                    </p>
+
+                    <h3>Miriam</h3>
+                    <p>As Moses floated down the river, his sister Miriam, a young girl, watched over him with care and
+                        courage. When Pharaoh's daughter discovered the baby and showed compassion, Miriam boldly
+                        approached and offered to find a Hebrew woman to nurse him. Though just a child, she played a
+                        crucial role in God's plan, ensuring that Moses remained connected to his true heritage. Miriam
+                        was likely at an age where she was still a virgin, similar to Mary, the mother of Jesus, who was
+                        also a young girl chosen for a divine purpose.
+                    </p>
+
+                    <h3>Second in Command</h3>
+                    <p>
+                        Moses was raised as an Egyptian prince in Pharaoh’s palace, receiving the finest education and
+                        training in leadership. As he grew, he gained status and authority, becoming a respected figure
+                        in Egyptian society. Though he lived among royalty, he never forgot his Hebrew heritage.
+                        Eventually, he rose to a high position, possibly second only to Pharaoh himself, gaining
+                        influence and power.
+                    </p>
+
+                    <h3>Stepping Down</h3>
+                    <p>
+                        Moses, once a powerful figure in Pharaoh’s palace, chose to leave behind his position and
+                        privileges to stand with his oppressed people. He could no longer ignore their suffering, and in
+                        a defining moment, he defended a fellow Hebrew, which led to his exile from Egypt. This
+                        sacrifice mirrors the journey of Jesus, who stepped down from heaven to live as a humble man
+                        among humanity. Just as Moses left his royal status to lead his people to freedom, Jesus left
+                        His divine glory to save mankind.
+                    </p>
+                </div>
+            </div>
+
+            <!-- TODO: Moses, The burning Bush -->
+
+            <!-- TODO: Moses, 10 Plagues -->
+
+            <!-- why when 'added', window not scrolled to this element ? -->
+            <!--
+            <div class="n" id="moses-red-sea" data-step="550">
+                <div class="date">~1500 BC</div>
+                <div class="k">Moses, Red Sea Parting</div>
+                <div class="b">
+                    <button class="button small secondary" data-open="detail-modal">
+                        <i class=" fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="detail">
+                    <h3>Moses</h3>
+                    <p>
+                        Moses was born in Egypt during a time when the Israelites were enslaved. He was raised by
+                        Pharaoh's
+                        daughter but later fled to Midian after killing an Egyptian. God called Moses to lead the
+                        Israelites out of Egypt.
+                    </p>
+
+                    <h3>Red Sea</h3>
+                    <p>
+                        God parted the Red Sea so that the Israelites could escape from the pursuing Egyptian army. The
+                        waters returned to their place, drowning the Egyptians.
+                    </p>
+                </div>
+            </div>
+            -->
+
+            <div class="n" id="10-commandments" data-step="600">
                 <div class="date"></div>
                 <div class="k">Ten Commandments</div>
                 <div class="b">
@@ -185,7 +259,9 @@
                 </div>
             </div>
 
-            <div class="n" id="tabernacle" data-step="170">
+            <!-- TODO: Camp arrangement -->
+
+            <div class="n" id="tabernacle" data-step="180">
                 <div class="date"></div>
                 <div class="k">Tabernacle</div>
                 <div class="b">
@@ -198,7 +274,26 @@
                 </div>
             </div>
 
-            <div class="n" id="judges" data-step="200">
+            <!-- TODO: Into Wilderness -->
+
+            <!-- TODO: Bronze serpent -->
+
+            <!-- TODO: Manna -->
+
+            <div class="n" id="joshua-into-promised-land" data-step="200">
+                <div class="date"></div>
+                <div class="k">Joshua, Into the Promised Land</div>
+                <div class="b">
+                    <button class="button small secondary" data-open="detail-modal"">
+                        <i class=" fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="detail">
+                    <p>No content available</p>
+                </div>
+            </div>
+
+            <div class="n" id="judges" data-step="700">
                 <div class="date"></div>
                 <div class="k">Time of Judges</div>
                 <div class="b">
@@ -211,18 +306,34 @@
                 </div>
             </div>
 
-            <div class="n" id="kingdom-of-israel-king-david" data-step="150">
+            <div class="n" id="kingdom-of-israel" data-step="210">
                 <div class="date">~1000 BC</div>
-                <div class="k">Kingdom of Israel, King David</div>
+                <div class="k">Kingdom of Israel</div>
                 <div class="b">
                     <button class="button small secondary" data-open="detail-modal"">
                         <i class=" fas fa-arrow-right"></i>
                     </button>
                 </div>
                 <div class="detail">
-                    <!-- contain detail info, will be shown in pop up -->
                     <h3>Kingdom of Israel</h3>
                     <p>Start of Kingdom of Israel with Saul as the first king.</p>
+                </div>
+            </div>
+
+            <div class="n" id="king-david" data-step="220">
+                <div class="date">~1000 BC</div>
+                <div class="k">King David</div>
+                <div class="b">
+                    <button class="button small secondary" data-open="detail-modal"">
+                        <i class=" fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="detail">
+                    <h3>Migdal-Eder</h3>
+                    <P>No content</P>
+
+                    <h3>David VS Goliath</h3>
+                    <p>No content</p>
 
                     <h3>King David</h3>
                     <p>David was a shepherd who became the second King. David is considered as the greatest king Israel
@@ -231,7 +342,7 @@
             </div>
 
 
-            <div class="n" id="solomon" data-step="300">
+            <div class="n" id="solomon" data-step="800">
                 <div class="date"></div>
                 <div class="k">Solomon</div>
                 <div class="b">
@@ -244,7 +355,7 @@
                 </div>
             </div>
 
-            <div class="n" id="first-temple" data-step="350">
+            <div class="n" id="first-temple" data-step="240">
                 <div class="date"></div>
                 <div class="k">First Temple</div>
                 <div class="b">
@@ -257,7 +368,7 @@
                 </div>
             </div>
 
-            <div class="n" id="israel-kingdom-split" data-step="400">
+            <div class="n" id="kingdom-split" data-step="260">
                 <div class="date"></div>
                 <div class="k">Kingdom Split: Israel vs Jewish</div>
                 <div class="b">
@@ -283,6 +394,41 @@
                 </div>
             </div>
 
+            <div class="n" id="temple-destruction-exiled-to-babylon" data-step="300">
+                <div class="date">~600 BC</div>
+                <div class="k">Temple Destruction, Exiled to Babylon</div>
+                <div class="b">
+                    <button class="button small secondary" data-open="detail-modal"">
+                        <i class=" fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="detail">
+                    <h3>First Temple Desctruction</h3>
+                    <p></p>
+
+                    <h3>Gathered in Bethlehem</h3>
+                    <p>
+                        TODO: Close to Rachel's tomb, and Migdal-Eder. Jewish tradition saying the Misah will come from
+                        that place ?
+                    </p>
+
+                </div>
+            </div>
+
+            <!--
+            <div class="n" id="second-temple" data-step="350">
+                <div class="date">~500 BC</div>
+                <div class="k">Second Temple</div>
+                <div class="b">
+                    <button class="button small secondary" data-open="detail-modal"">
+                        <i class=" fas fa-arrow-right"></i>
+                    </button>
+                </div>
+                <div class="detail">
+                    <p>No content available</p>
+                </div>
+            </div>
+            -->
 
             <div class="n" id="jesus-birth" data-step="0">
                 <div class="date">~3 BC</div>
@@ -295,7 +441,10 @@
                 <div class="detail">
                     <!-- contain detail info, will be shown in pop up -->
                     <h3>Jesus is born</h3>
-                    <p>Jesus was born in Bethlehem to Mary and Joseph. He is the Son of God and the Savior of the world.
+                    <p>
+                        Jesus was born in Bethlehem to Mary and Joseph.
+                        In the area of Migdal-Eder ?
+                        He is the Son of God and the Savior of the world.
                     </p>
 
                     <h3>Ministry</h3>
