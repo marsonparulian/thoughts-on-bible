@@ -20,22 +20,24 @@ $(document).ready(function () {
     const stepSeries = constructStepSeries();
     const maxStep = stepSeries[stepSeries.length - 1].step;
     step = normalizeStep(step);
+    // The biggest index / latest of `stepObject`that currently is shown
     let indexMaxShownStepObject = stepSeries.findIndex(stepObject => stepObject.step === step);
 
-    // Ref to the prev and next buttons
+    // References to the prev and next buttons
     const prevButton = document.querySelector('#timeline-prev');
     const nextButton = document.querySelector('#timeline-next');
 
-    // Attach event listener to the previous button
+    // Attach event listenerd to the previous and next buttons
     prevButton.addEventListener('click', previousStep);
-    // Attach event listener to the next button
     nextButton.addEventListener('click', nextStep);
 
-    // Attach event listener for `.n .b button` to open Foundation's modal,
+    // Attach event listener for `.n .b button` to update modal's content accordingly
     attachDetailButtonsHandler();
 
     // Ready to show the timeline
     setStep(step);
+
+    // End of initial process
 
     /**
      * Construct list of `step`. Each `step` contains array of `node`.
@@ -43,7 +45,6 @@ $(document).ready(function () {
      */
     function constructStepSeries() {
         // Collect all values of `data-step`
-        // let steps = Array.from(document.querySelectorAll('[data-step]')).map(node => node.getAttribute('data-step'));
         let steps = Array.from(document.querySelectorAll('.n')).map(node => node.getAttribute('data-step'));
 
         // Convert the values to number
@@ -91,7 +92,7 @@ $(document).ready(function () {
         if (indexMaxShownStepObject === 0) return;
 
         // Scroll to the `node` to be removed
-        await scrollToThePreviousNode();
+        await scrollToTheFocusedNode();
 
         // Hide all `node` elements for the stepObject before move to the previous step
         const stepObject = stepSeries[indexMaxShownStepObject];
@@ -101,10 +102,12 @@ $(document).ready(function () {
             // Add the `remove` class to apply animation
             classList.add('remove')
 
-            // Remove the `show` class after the animation ends to make sure the element is hidden
+            // After animation ends, remove class `init` and `added` to make sure elements stay hidden
             stepObject.nodes[i].addEventListener('animationend', function handler() {
                 classList.remove('init');
                 classList.remove('added');
+
+                // Remove the event listener
                 stepObject.nodes[i].removeEventListener('animationend', handler);
             });
 
@@ -124,9 +127,8 @@ $(document).ready(function () {
         if (indexMaxShownStepObject === stepSeries.length - 1) return;
 
         // Scroll to the `node`s to be inserted
-        await scrollToThePreviousNode();
+        await scrollToTheFocusedNode();
 
-        // Decide what is the next step based on the current step value
         // Move to the next stepObject in the stepSeries
         indexMaxShownStepObject++;
 
@@ -134,8 +136,8 @@ $(document).ready(function () {
         const stepObject = stepSeries[indexMaxShownStepObject];
         for (let i = 0; i < stepObject.nodes.length; i++) {
             const classList = stepObject.nodes[i].classList;
-            classList.remove('remove');
             classList.add('added');
+            classList.remove('remove');
 
             await new Promise(r => setTimeout(r, 200))
         }
@@ -144,27 +146,20 @@ $(document).ready(function () {
     }
 
     /**
-     * Scroll to the `node` before the first `node` that going to be hidden, or scroll to the top `node`
+     * Scroll to the first `node` that is going to be hidden or to be shown
      */
-    async function scrollToThePreviousNode() {
+    async function scrollToTheFocusedNode() {
         // Get the index before the stepObject which nodes are going to be hidden, or get the first index
-        // const indexStepToShow = indexMaxShownStepObject - 1 || 0;
-        const indexStepToShow = indexMaxShownStepObject;
+        const indexFocusedStep = indexMaxShownStepObject;
 
         // Get the first `node`, which will be scrolled too
-        const nodeToScroll = stepSeries[indexStepToShow].nodes[0];
-
-        // addEventListener('scroll', function scrollEndHandler(e) {
-        //     scrollTimeout = setTimeout(function () {
-        //         console.log('Scroll ended');
-        //     }, 100);
-        // });
+        const nodeToScroll = stepSeries[indexFocusedStep].nodes[0];
 
         nodeToScroll.scrollIntoView({ behavior: 'smooth' });
 
         // TODO: If the `node` already in the view, do not need to scrool and wait
 
-        // The 'waiting' for scroll to finish, will be done in CSS `animation-delay` for both 'previous' and 'next'
+        // No need to wait. The 'waiting' for scroll to finish, will be done in CSS `animation-delay` for both 'previous' and 'next'
         return Promise.resolve();
     }
 
@@ -174,10 +169,6 @@ $(document).ready(function () {
     async function onStepChanged(newStep) {
         // Set the current step
         step = newStep;
-
-        // TODO Hide all `node` elements which should be hidden based on the step value
-
-
 
         // Set the current step in the URL
         reflectStepInURL(step);
@@ -191,14 +182,13 @@ $(document).ready(function () {
      */
     async function setStep(step) {
         // Show all `node` elements which should be shown based on the step value
-        // However the appearance shoud be by the order in HTML, not by the `data-step` value
+        // However the appearance should be by the order in HTML, not by the `data-step` value
         let nodes = Array.from(document.querySelectorAll('.n[data-step]'));
         for (let i = 0; i < nodes.length; i++) {
             if (parseInt(nodes[i].getAttribute('data-step')) <= step) {
                 const classList = nodes[i].classList;
                 classList.remove('remove');
                 classList.add('init');
-                classList.add('show');
                 await new Promise(r => setTimeout(r, 200))
             }
         }
@@ -208,11 +198,11 @@ $(document).ready(function () {
     }
     /**
      * Reflect the current step in the URL
-     * @param {number} step Current step value
+     * @param {number} newStep Current step value
      */
-    function reflectStepInURL(step) {
+    function reflectStepInURL(newStep) {
         const url = new URL(window.location.href);
-        url.searchParams.set('step', step);
+        url.searchParams.set('step', newStep);
         // window.history.pushState({}, '', url);
         window.history.replaceState({}, '', url);
     }
@@ -233,23 +223,19 @@ $(document).ready(function () {
         // Enable or disable the next button based on the current step value
         if (step >= maxStep) {
             nextButton.disabled = true;
-            console.log('next step is disabled');
         } else {
             nextButton.disabled = false;
         }
-        // console.log(`max step: ${maxStep}`);
-        // console.log(`current step : ${step}`);
-        // console.log(`typeof step: ${typeof step}`);
     }
 
     /**
-     * Attach event listener for `.n .b button` to open Foundation's modal, 
-     * and clone the content of `.n .detail` to the Foundation's modal.
+     * Attach event listener for `.n .b button` to clone the content of `.n .detail` to the Foundation's modal.
+     * The modal toggle feature is handled by Foundation' utility
      * The modal is hidden by default.
      */
     function attachDetailButtonsHandler() {
-
-        // let modal = new Foundation.Reveal($('#modal'));
+        // Ref to the detailModal
+        const detailModal = $('#detail-modal');
 
         $('.n .b button').on('click', function (e) {
             e.preventDefault();
@@ -258,26 +244,11 @@ $(document).ready(function () {
             const dateContent = $(this).closest('.n').find('.date').html();
             const detailContent = $(this).closest('.n').find('.detail').html();
 
-            $('#detail-modal h1').html(titleContent);
-            $('#detail-modal .lead').html(dateContent);
-            $('#detail-modal .content').html(detailContent);
-
-            // new Foundation.Reveal($('#modal')).open();
-            // $('#modal').foundation('open');
-            // modal.open();
+            detailModal.find('h1').html(titleContent);
+            detailModal.find('.lead').html(dateContent);
+            detailModal.find('.content').html(detailContent);
         });
-
-        /**
-         * Custom handler to close the modal
-         */
-        $('#modal .other-close-button').on('click', () => {
-            // modal.close();
-        });
-
     }
-
-
-
 
 });
 
